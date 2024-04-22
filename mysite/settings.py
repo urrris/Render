@@ -26,10 +26,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECRET_KEY = 'django-insecure-zxr6lt+siu148$d#%b_h_!wxcg$4bm(@om@-5859#3&(u*hzhz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = os.environ.get('DEBUG', default=False)
 # DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://uri:2137649@localhost:5432/mysite',
+        default='postgres://mysite:FLk2X6ws3AJFslGE9uVCiTYa7zCQFeue@dpg-coha3bev3ddc73fkvsbg-a.oregon-postgres.render.com/mysite_baza',
         conn_max_age=600
     )
 }
@@ -134,12 +134,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-if not DEBUG:
+if DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
     # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'homepage/media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
