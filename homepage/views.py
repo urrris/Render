@@ -66,7 +66,7 @@ class LoginView(View):
             User.objects.get(email=email, password=password)
             request.session['login'] = True
             request.session['__user-email'] = email
-            request.session.set_expiry(timedelta(days=1))
+            request.session.set_expiry(timedelta(seconds=10))
             return redirect('/workspace')
         except:
             return render(request, 'homepage/login.html', {'hint': 'Пользователь не найден.', 'flag': 'true'})

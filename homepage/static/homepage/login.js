@@ -3,7 +3,6 @@
 let form = document.querySelector('.main__form');
 let showPasswordButton = document.getElementById('show');
 let passwordField = document.getElementById('password');
-let confirmPasswordField = document.getElementById('confirm_password');
 
 form.addEventListener('change', function (event) {
     let emailField = form.elements.email;
@@ -19,9 +18,7 @@ form.addEventListener('change', function (event) {
 showPasswordButton.addEventListener('click', function (event) {
     if (showPasswordButton.checked) {
         passwordField.type = 'text';
-        confirmPasswordField.type = 'text';
     } else {
         passwordField.type = 'password';
-        confirmPasswordField.type = 'password';
     }
 });
